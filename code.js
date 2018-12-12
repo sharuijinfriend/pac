@@ -1,5 +1,3 @@
-// Author: iBug
-
 function belongsToSubnet(host, list) {
   var ip = host.split(".");
   ip = 0x1000000 * Number(ip[0]) + 0x10000 * Number(ip[1]) +
@@ -20,18 +18,45 @@ function belongsToSubnet(host, list) {
 
   // Match
   var masked = ip & list[x][1];
-  return (masked ^ list[x][0]) == 0;
+  return (masked >>> 0) == (list[x][0] >>> 0);
 }
 
-var proxy = "__PROXY__";
+function isChina(host) {
+  return belongsToSubnet(host, CHINA);
+}
+
+function isLan(host) {
+  return belongsToSubnet(host, LAN);
+}
+
+function check_ipv4(host) {
+	var re_ipv4 = /^\d+\.\d+\.\d+\.\d+$/g;
+	if (re_ipv4.test(host)) {
+		return true;
+	}
+}
+
+
+var proxy = "SOCKS5 127.0.0.1:1080;";
 var direct = "DIRECT";
 
+
 function FindProxyForURL(url, host) {
-  var remote = dnsResolve(host);
-  if (belongsToSubnet(remote, WHITELIST)) {
-      return direct;
-  }
-  return proxy;
+	if ( isPlainHostName(host) === true ) {
+		return direct;
+	}
+	var remote = dnsResolve(host);
+	if ( check_ipv4(remote) === true ) {
+		if (isChina(remote) || isLan(remote)) {
+			return direct;
+	}
+	else{
+		return proxy;
+	}
+	}
+	else{
+		return proxy;
+	}
 }
 
 // Format: [Hex IP, mask]
