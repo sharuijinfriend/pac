@@ -42,7 +42,6 @@ var direct = "DIRECT";
 
 
 function FindProxyForURL(url, host) {
-
 	if ( isPlainHostName(host) === true ) {
 		return direct;
 	}
@@ -68,10 +67,13 @@ function FindProxyForURL(url, host) {
 	}
 	}
 	else{
-		return proxy;
+		return direct;
 	}
 }
 
+// Format: [Hex IP, mask]
+// e.g. 1.0.1.0/24 = [0x80008000, 0xFFFFFF00]
+// Source: http://www.ipdeny.com/ipblocks/data/aggregated/cn-aggregated.zone
 
 var CHINA = [
   [0x01000100, 0xFFFFFF00],
@@ -5730,6 +5732,8 @@ var LAN = [
   [0x0A000000, 0xFF000000],
   [0x0A000000, 0xFF000000],
   [0x0A000000, 0xFF000000],
+  [0x0A000000, 0xFF000000],
+  [0x7F000000, 0xFFFFFF00],
   [0x7F000000, 0xFFFFFF00],
   [0x7F000000, 0xFFFFFF00],
   [0x7F000000, 0xFFFFFF00],
@@ -5748,6 +5752,8 @@ var LAN = [
   [0xAC100000, 0xFFF00000],
   [0xAC100000, 0xFFF00000],
   [0xAC100000, 0xFFF00000],
+  [0xAC100000, 0xFFF00000],
+  [0xC0A80000, 0xFFFF0000],
   [0xC0A80000, 0xFFFF0000],
   [0xC0A80000, 0xFFFF0000],
   [0xC0A80000, 0xFFFF0000],

@@ -42,7 +42,6 @@ var direct = "DIRECT";
 
 
 function FindProxyForURL(url, host) {
-
 	if ( isPlainHostName(host) === true ) {
 		return direct;
 	}
@@ -68,8 +67,11 @@ function FindProxyForURL(url, host) {
 	}
 	}
 	else{
-		return proxy;
+		return direct;
 	}
 }
 
+// Format: [Hex IP, mask]
+// e.g. 1.0.1.0/24 = [0x80008000, 0xFFFFFF00]
+// Source: http://www.ipdeny.com/ipblocks/data/aggregated/cn-aggregated.zone
 
