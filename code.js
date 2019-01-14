@@ -47,15 +47,15 @@ function FindProxyForURL(url, host) {
 		return direct;
 	}
 	if (dnsDomainIs(host, ".ieee.org") ||
-		dnsDomainIs(host, "springer.com") ||
-		dnsDomainIs(host, "sciencedirect.com") ||
-		dnsDomainIs(host, "wiley.com") ||
-		dnsDomainIs(host, "acm.org") ||
-		dnsDomainIs(host, "sagepub.com") ||
-		dnsDomainIs(host, "engineeringvillage.com") ||
-		dnsDomainIs(host, "emeraldinsight.com") ||
-		dnsDomainIs(host, "jstor.org") ||
-		dnsDomainIs(host, "nature.com")){
+		dnsDomainIs(host, ".springer.com") ||
+		dnsDomainIs(host, ".sciencedirect.com") ||
+		dnsDomainIs(host, ".wiley.com") ||
+		dnsDomainIs(host, ".acm.org") ||
+		dnsDomainIs(host, ".sagepub.com") ||
+		dnsDomainIs(host, ".engineeringvillage.com") ||
+		dnsDomainIs(host, ".emeraldinsight.com") ||
+		dnsDomainIs(host, ".jstor.org") ||
+		dnsDomainIs(host, ".nature.com")){
 		return direct;
 	}
 	var remote = dnsResolve(host);
