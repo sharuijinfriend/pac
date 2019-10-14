@@ -26,7 +26,7 @@ function isChina(host) {
 }
 
 function isgoogle(host) {
-  return host== "192.168.1.204"
+  return host== "192.168.1.5"
 }
 
 function isLan(host) {
