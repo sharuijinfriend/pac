@@ -16,3 +16,7 @@ EOF
 python3 ranges_to_js.py > tmp.js
 cat code.js tmp.js > out.pac
 rm tmp.js
+git add .
+git status
+git commit -m "new version"
+git push origin master
