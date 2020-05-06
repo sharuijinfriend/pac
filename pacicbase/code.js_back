@@ -25,23 +25,23 @@ function isChina(host) {
   return belongsToSubnet(host, CHINA);
 }
 
+function isgoogle(host) {
+  return host== "192.168.1.5"
+}
+
 function isLan(host) {
   return belongsToSubnet(host, LAN);
 }
-
-function check_ipv4(host) {
-	var re_ipv4 = /^\d+\.\d+\.\d+\.\d+$/g;
-	if (re_ipv4.test(host)) {
-		return true;
-	}
-}
-
 
 var proxy = "SOCKS5 127.0.0.1:1080;";
 var direct = "DIRECT";
 
 
 function FindProxyForURL(url, host) {
+
+	if ( isPlainHostName(host) === true ) {
+		return direct;
+	}
 	if (dnsDomainIs(host, ".ieee.org") ||
 		dnsDomainIs(host, ".springer.com") ||
 		dnsDomainIs(host, ".sciencedirect.com") ||
@@ -54,14 +54,18 @@ function FindProxyForURL(url, host) {
 		dnsDomainIs(host, ".nature.com")){
 		return direct;
 	}
-	if (!isResolvable(host)) {
-	  return proxy;
-	}
 	var remote = dnsResolve(host);
-	if (isChina(remote) || isLan(remote)) {
-			return direct;
-	}
+	if ( isgoogle(remote) ) {
 		return proxy;
 	}
+	if (isChina(remote) || isLan(remote)) {
+		return direct;
+	}
+	else{
+		return proxy;
+	}
+	
+}
+
 
 
